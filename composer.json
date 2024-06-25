@@ -1,0 +1,15 @@
+{
+    "name": "cullen/projectsalepurchase",
+    "autoload": {
+        "psr-4": {
+            "Cullen\\Projectsalepurchase\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "cullen",
+            "email": "palisocericson87@gmail.com"
+        }
+    ],
+    "require": {}
+}
