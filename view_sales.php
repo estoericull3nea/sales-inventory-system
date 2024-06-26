@@ -199,7 +199,6 @@ if ($lastpage > 1) {
 				<li><a href="view_product.php" class="stock-tab">Stocks / Products</a></li>
 				<li><a href="view_report.php" class="report-tab">Reports</a></li>
 			</ul>
-			<a href="#" id="company-branding-small" class="fr"><img src="<?php echo isset($_SESSION['logo']) ? "upload/" . $_SESSION['logo'] : "upload/posnic.png"; ?>" alt="Point of Sale" /></a>
 		</div>
 	</div>
 

@@ -169,13 +169,7 @@ include_once("init.php");
 				<li><a href="view_report.php" class="report-tab">Reports</a></li>
 			</ul> <!-- end tabs -->
 
-			<!-- Change this image to your own company's logo -->
-			<!-- The logo will automatically be resized to 30px height. -->
-			<a href="#" id="company-branding-small" class="fr"><img src="<?php if (isset($_SESSION['logo'])) {
-																				echo "upload/" . $_SESSION['logo'];
-																			} else {
-																				echo "upload/posnic.png";
-																			} ?>" alt="Point of Sale" /></a>
+
 
 		</div> <!-- end full-width -->
 

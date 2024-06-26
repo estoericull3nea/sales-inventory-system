@@ -194,11 +194,7 @@ require './connection.php';
 				<li><a href="view_product.php" class="active-tab stock-tab">Stocks / Products</a></li>
 				<li><a href="view_report.php" class="report-tab">Reports</a></li>
 			</ul>
-			<a href="#" id="company-branding-small" class="fr"><img src="<?php if (isset($_SESSION['logo'])) {
-																				echo "upload/" . $_SESSION['logo'];
-																			} else {
-																				echo "upload/posnic.png";
-																			} ?>" alt="Point of Sale" /></a>
+
 		</div>
 	</div>
 

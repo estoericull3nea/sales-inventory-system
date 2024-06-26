@@ -48,11 +48,6 @@ include_once("init.php");
 			<?php $line = $db->queryUniqueObject("SELECT * FROM store_details ");
 			$_SESSION['logo'] = $line->log;
 			?>
-			<a href="#" id="company-branding-small" class="fr"><img src="<?php if (isset($_SESSION['logo'])) {
-																				echo "upload/" . $_SESSION['logo'];
-																			} else {
-																				echo "upload/posnic.png";
-																			} ?>" alt="Point of Sale" /></a>
 
 		</div> <!-- end full-width -->
 

@@ -111,11 +111,7 @@ include_once("init.php");
 			</ul>
 			<!-- end tabs -->
 
-			<a href="#" id="company-branding-small" class="fr"><img src="<?php if (isset($_SESSION['logo'])) {
-																				echo "upload/" . $_SESSION['logo'];
-																			} else {
-																				echo "upload/posnic.png";
-																			} ?>" alt="Point of Sale" /></a>
+
 		</div>
 		<!-- end full-width -->
 	</div>
