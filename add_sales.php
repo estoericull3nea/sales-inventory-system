@@ -230,7 +230,7 @@ while ($row = $result->fetch_assoc()) {
             if (response.status === 'error') {
               alert(response.message);
             } else {
-              alert('Data inserted and stock updated successfully');
+              alert('Transaction Added');
               window.location.reload();
             }
           } else {

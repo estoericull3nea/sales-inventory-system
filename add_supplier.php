@@ -131,118 +131,28 @@ include_once("init.php");
 					<div class="content-module-main cf">
 
 
-						<?php
-						//Gump is libarary for Validatoin
-
-						if (isset($_POST['name'])) {
-							$_POST = $gump->sanitize($_POST);
-							$gump->validation_rules(array(
-								'name'    	  => 'required|max_len,100|min_len,3',
-								'address'     => 'max_len,200',
-								'contact1'    => 'alpha_numeric|max_len,20',
-								'contact2'    => 'alpha_numeric|max_len,20'
-							));
-
-							$gump->filter_rules(array(
-								'name'    	  => 'trim|sanitize_string|mysqli_escape',
-								'address'     => 'trim|sanitize_string|mysqli_escape',
-								'contact1'    => 'trim|sanitize_string|mysqli_escape',
-								'contact2'    => 'trim|sanitize_string|mysqli_escape'
-							));
-
-							$validated_data = $gump->run($_POST);
-							$name 		= "";
-							$address 	= "";
-							$contact1	= "";
-							$contact2 	= "";
-
-							if ($validated_data === false) {
-								echo $gump->get_readable_errors(true);
-							} else {
-								$name = ($_POST['name']);
-								$address = ($_POST['address']);
-								$contact1 = ($_POST['contact1']);
-								$contact2 = ($_POST['contact2']);
-
-								$count = $db->countOf("supplier_details", "supplier_contact2='$contact2'");
-								if ($count >= 1) {
-									$data = 'Dublicat Entry. Please Verify';
-									$msg = '<p style=color:red;font-family:gfont-family:Georgia, Times New Roman, Times, serif>' . $data . '</p>'; //
-									header("Location: add_supplier.php?msg=$msg");
-						?>
-									<script src="dist/js/jquery.ui.draggable.js"></script>
-									<script src="dist/js/jquery.alerts.js"></script>
-									<script src="dist/js/jquery.js"></script>
-									<link rel="stylesheet" href="dist/js/jquery.alerts.css">
-
-									<script type="text/javascript">
-										jAlert('<?php echo  $msg; ?>', 'POSNIC');
-									</script>
-							<?php
-
-								} else {
-
-									if ($db->query("insert into supplier_details values(NULL,'$name','$address','$contact1','$contact2',0)")) {
-										$msg = "$name  Supplier Details Added";
-										header("Location: add_supplier.php?msg=$msg");
-									} else
-										echo "<br><font color=red size=+1 >Problem in Adding !</font>";
-								}
-							}
-						}
-
-						//Gump is libarary for Validatoin
-						if (isset($_GET['msg'])) {
-							$data = $_GET['msg'];
-							$msg = '<p style=color:#153450;font-family:gfont-family:Georgia, Times New Roman, Times, serif>' . $data . '</p>'; //
-							?>
-
-							<script src="dist/js/jquery.ui.draggable.js"></script>
-							<script src="dist/js/jquery.alerts.js"></script>
-							<script src="dist/js/jquery.js"></script>
-							<link rel="stylesheet" href="dist/js/jquery.alerts.css">
-
-							<script type="text/javascript">
-								jAlert('<?php echo  $msg; ?>', 'POSNIC');
-							</script>
-						<?php
-						}
-						?>
-
-						<form name="form1" method="post" id="form1" action="">
-
-							<p><strong>Add Supplier Details </strong> - Add New ( Control +u)</p>
+						<form id="form1">
+							<p><strong>Add Supplier Details </strong></p>
 							<table class="form" border="0" cellspacing="0" cellpadding="0">
 								<tr>
 									<td><span class="man">*</span>Name:</td>
-									<td><input name="name" placeholder="ENTER YOUR FULL NAME" type="text" id="name" maxlength="200" class="round default-width-input" value="<?php echo $name ?? ''; ?>" /></td>
+									<td><input name="name" placeholder="ENTER YOUR FULL NAME" type="text" id="name" maxlength="200" class="round default-width-input" required /></td>
 									<td>Contact</td>
-									<td><input name="contact1" placeholder="ENTER YOUR CONTACT" type="text" id="buyingrate" maxlength="20" class="round default-width-input" value="<?php echo $contact1 ?? ''; ?>" /></td>
-								</tr>
-								<tr>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
+									<td><input name="contact" placeholder="ENTER YOUR CONTACT" type="text" id="contact" maxlength="20" class="round default-width-input" required /></td>
 								</tr>
 								<tr>
 									<td>Address</td>
-									<td><textarea name="address" placeholder="ENTER YOUR ADDRESS" cols="8" class="round full-width-textarea"><?php echo $address ?? ''; ?></textarea></td>
+									<td><textarea name="address" placeholder="ENTER YOUR ADDRESS" cols="8" class="round full-width-textarea" required></textarea></td>
 								</tr>
 								<tr>
 									<td>&nbsp;</td>
 									<td>&nbsp;</td>
 								</tr>
-
-
-
 								<tr>
-									<td>&nbsp;
-
-									</td>
+									<td>&nbsp;</td>
 									<td>
 										<input class="button round blue image-right ic-add text-upper" type="submit" name="Submit" value="Add">
-										(Control + S)
-
-									<td align="right"><input class="button round red   text-upper" type="reset" name="Reset" value="Reset"> </td>
+									<td align="right"><input class="button round red text-upper" type="reset" name="Reset" value="Reset"> </td>
 								</tr>
 							</table>
 						</form>
@@ -261,10 +171,33 @@ include_once("init.php");
 
 
 
-		<!-- FOOTER -->
-		<div id="footer">
-			<p> &copy;Copyright 2013</p>
-		</div> <!-- end footer -->
+		<script>
+			const form1 = document.getElementById('form1');
+			form1.addEventListener('submit', e => {
+				e.preventDefault();
+
+				const formData = new FormData(form1);
+				const json = {};
+
+				formData.forEach((value, key) => {
+					json[key] = value;
+				});
+
+
+				const xhr = new XMLHttpRequest();
+				xhr.open('POST', './ajax/supplier/addSupplier.php', true);
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				xhr.onload = () => {
+					console.log(xhr.responseText);
+					if (xhr.responseText === '1') {
+						alert('Supplier added successfully')
+						window.location.reload()
+					}
+				};
+				xhr.send(JSON.stringify(json));
+			});
+		</script>
+
 
 </body>
 
