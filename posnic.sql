@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2024 at 10:20 AM
+-- Generation Time: Jun 26, 2024 at 08:44 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -77,7 +77,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `stock_name`, `stock_quantity`, `supplier_name`, `price`, `category`, `created_at`) VALUES
-(61, 'Kape', 85, 'Ericson Palisoc', 500, '', '2024-06-25 15:52:24'),
+(61, 'Kape', 80, 'Ericson Palisoc', 500, '', '2024-06-25 15:52:24'),
 (62, 'Milktea', 495, 'Miah Moore', 100, '', '2024-06-25 15:52:55');
 
 -- --------------------------------------------------------
@@ -133,7 +133,8 @@ INSERT INTO `stock_entries` (`id`, `stock_name`, `quantity`, `selling_price`, `u
 (461, 'Kape', 5, 500.00, 'qwe', 2500.00, 'qwe', '123', 0, '2024-06-25 15:53:54'),
 (462, 'Kape', 5, 500.00, 'qwe', 2500.00, 'qwe', '123', 6, '2024-06-25 16:07:15'),
 (463, 'Kape', 5, 500.00, 'qwe', 2500.00, 'qwe', '123', 500, '2024-06-25 16:07:49'),
-(464, 'Milktea', 5, 100.00, 'qwe', 500.00, 'qwe', '123', 500, '2024-06-25 16:09:06');
+(464, 'Milktea', 5, 100.00, 'qwe', 500.00, 'qwe', '123', 500, '2024-06-25 16:09:06'),
+(465, 'Kape', 5, 500.00, 'qwe', 2500.00, 'qwe', '123', 2500, '2024-06-26 12:23:15');
 
 -- --------------------------------------------------------
 
@@ -228,16 +229,15 @@ CREATE TABLE `supplier_details` (
   `supplier_name` varchar(200) NOT NULL,
   `supplier_address` varchar(500) NOT NULL,
   `supplier_contact1` varchar(100) NOT NULL,
-  `supplier_contact2` varchar(100) NOT NULL,
-  `balance` int(11) NOT NULL
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `supplier_details`
 --
 
-INSERT INTO `supplier_details` (`id`, `supplier_name`, `supplier_address`, `supplier_contact1`, `supplier_contact2`, `balance`) VALUES
-(53, 'qweqw', 'qweqwe', 'sdfasdA2312', '', 0);
+INSERT INTO `supplier_details` (`id`, `supplier_name`, `supplier_address`, `supplier_contact1`, `created_at`) VALUES
+(55, 'qwe', 'qwe', 'qwe', '2024-06-26 12:42:53');
 
 -- --------------------------------------------------------
 
@@ -367,7 +367,7 @@ ALTER TABLE `stock_avail`
 -- AUTO_INCREMENT for table `stock_entries`
 --
 ALTER TABLE `stock_entries`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=465;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=466;
 
 --
 -- AUTO_INCREMENT for table `stock_sales`
@@ -385,7 +385,7 @@ ALTER TABLE `stock_user`
 -- AUTO_INCREMENT for table `supplier_details`
 --
 ALTER TABLE `supplier_details`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `transactions`
